@@ -17,7 +17,12 @@ uploaded_file = st.sidebar.file_uploader("Choose a file")
 if uploaded_file is not None:
     bytes_data = uploaded_file.getvalue()
     data = bytes_data.decode("utf-8")
-    df = preprocessing.preprocess(data)
+    hy = data[:50]
+    reas = hy.split()
+    if (reas[2]=='-'):
+        df = preprocessing.preprocess24(data)
+    else:
+        df =preprocessing.preprocess12(data)
     st.dataframe(df[["message", "user", "datetime"]])
     # st.dataframe(df)
 
